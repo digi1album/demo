@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import Image from '../Assets/images/home-header.jpg'
 import { useNavigate } from 'react-router-dom'
 import { UserAuth } from '../context/AuthContext'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function HeaderCard() {
 
@@ -20,7 +22,11 @@ export default function HeaderCard() {
     }
     catch(e)
     {
-      console.log(e)
+      toast.error(e.message
+      , {
+        position: toast.POSITION.TOP_CENTER
+      });
+      // console.log(JSON.parse(JSON.stringify(e.message)))
     }
 
   }
@@ -73,7 +79,7 @@ export default function HeaderCard() {
             {/* Submit button */}
           
               <button type="submit" className="text-white m-2 md:mt-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-md md:rounded-lg text-xs md:text-sm  px-2 md:px-5 py-1.5 md:py-2.5 text-center  mb-2">Submit</button>
-          
+              <ToastContainer />
               </form>
 
             )

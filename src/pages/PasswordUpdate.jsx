@@ -1,18 +1,30 @@
 import React, {useState} from 'react'
 import { UserAuth } from '../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export const PasswordUpdate = () => {
     const [newPassword, setNewPassword] = useState('')
 
-    const {setPassword} =UserAuth()
+    const {setPassword, logout} =UserAuth()
+
+    const navigate = useNavigate()
 
     const handleSubmit=async(e)=>{
             e.preventDefault()
 
             try{
                 const result = await setPassword(newPassword)
-                console.log(result)
+                await logout()
+                toast.success("Your Password Updated Successfully! Please Log In Again. ",{
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 2000,
+                })
+                setTimeout(()=>navigate('/'),2500)
+                
+                
             }
             catch(error)
             {
@@ -34,7 +46,7 @@ export const PasswordUpdate = () => {
 {/* Submit button */}
 
 <button type="submit" className="text-white m-2 md:mt-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-md md:rounded-lg text-xs md:text-sm  px-2 md:px-5 py-1.5 md:py-2.5 text-center  mb-2">Submit</button>
-
+<ToastContainer />
 </form>
     </div>
   )

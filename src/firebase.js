@@ -4,20 +4,7 @@ import { getAuth } from "firebase/auth";
 
 import { getFirestore, collection, getDocs, } from "firebase/firestore";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// const firebaseConfig_ENV = {
-// apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-// authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-// projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
-// storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-// messagingSenderId: process.env.REACT_APP_FIREBASE_MSG_SENDERID,
-// appId: process.env.REACT_APP_FIREBASE_APPID,
-// measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENTID,
-// databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL
-// };
 
 const API_KEY = process.env.REACT_APP_FIREBASE_API_KEY
 const AUTH_DOMAIN = process.env.REACT_APP_FIREBASE_AUTH_DOMAIN
@@ -49,7 +36,6 @@ const firebaseConfig = {
   };
   
 // Initialize Firebase
-console.log(firebaseConfig);
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);

@@ -146,8 +146,8 @@ const getData= async(pageNumber,continuationToken = undefined) =>{
 
   const breakpointColumnsObj = {
     default: 4, // Number of columns by default
-    1100: 3,    // Number of columns for screens 1100px and above
-    700: 1      // Number of columns for screens 700px and above
+    1100: 4,    // Number of columns for screens 1100px and above
+    700: 3      // Number of columns for screens 700px and above
   };
   return (
     user ? 

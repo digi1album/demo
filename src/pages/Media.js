@@ -11,7 +11,7 @@ export const Media = () => {
     const {user , Link} = UserAuth()
     let folders = Link && Object.keys(Link)
     const navigate=useNavigate()
-console.log(folders);
+
 if(folders)
 {
     let index = folders.indexOf('userID');
