@@ -5,39 +5,11 @@ import AWS from 'aws-sdk';
 import Modal from '../components/Modal';
 import Loading from '../components/Loading';
 import Masonry from 'react-masonry-css';
-
-
-const pageSize = 20;
-
-
-function Pagination({ totalCount, onPageChange }) {
-  const totalPages = Math.ceil(totalCount / pageSize);
-
-  const handlePageClick = (pageNumber) => {
-    onPageChange(pageNumber);
-  };
-
-  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
-
-  return (
-    
-    <div className='flex justify-center'>
-    <div className="fixed bottom-0 p-2 md:p-4 bg-white rounded-md bg-opacity-40 z-10 mb-2 md:mb-5 ">
-      <div className='flex justify-center space-x-3 items-center'>
-      {pageNumbers.map((pageNumber) => (
-        <button className='text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-sm md:rounded-md text-[20px]  px-1 md:px-2.5 py-0.5 ' key={pageNumber} onClick={() => handlePageClick(pageNumber)}>
-          {pageNumber}
-        </button>
-      ))}
-      </div>
-    </div>
-    </div>
-  );
-}
+import ReactPaginate from 'react-paginate';
 
 
 
-
+const pageSize = 50;
 
 
 export const MediaView = () => {
@@ -68,7 +40,7 @@ export const MediaView = () => {
     // wasabi credentials
   const wasabi_key_id = process.env.REACT_APP_WASABI_ACCESS_KEY_ID
   const wasabi_key= process.env.REACT_APP_WASABI_ACCESS_KEY
-  const bucketName = "themoments";
+  const bucketName = "digialbum";
   const region = "ap-southeast-1"; // Update with your bucket's region
   const endpoint = "https://s3.ap-southeast-1.wasabisys.com"; // Update with your Wasabi endpoint
   // const folderName = "Personal/Birthday/Photos/"; 
@@ -105,7 +77,8 @@ const getData= async(pageNumber,continuationToken = undefined) =>{
                 Bucket: bucketName,
                 Prefix: targetLink,
               }).promise();
-              setTotalCount(data_total.KeyCount);
+              const totalPages = Math.ceil(data_total.KeyCount/ pageSize);
+              setTotalCount(totalPages);
               console.log(data_total.KeyCount, "count")
             }
 
@@ -140,14 +113,15 @@ const getData= async(pageNumber,continuationToken = undefined) =>{
 
   console.log("page: ", currentPage, "data: ", data)
 
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  const handlePageChange = (e) => { 
+    console.log("selected page: ", e.selected+1)
+    setCurrentPage(e.selected+1);
   };
 
   const breakpointColumnsObj = {
     default: 4, // Number of columns by default
     1100: 4,    // Number of columns for screens 1100px and above
-    700: 3      // Number of columns for screens 700px and above
+    700: 2      // Number of columns for screens 700px and above
   };
   return (
     user ? 
@@ -160,8 +134,8 @@ const getData= async(pageNumber,continuationToken = undefined) =>{
     >
       { data.slice(1).map((i,index)=>{
       const params = { Bucket: bucketName, Key: i.Key };
-      const isImage = i.Key.endsWith('.JPG') || i.Key.endsWith('.png') || i.Key.endsWith('.jpeg');
-      const isVideo = i.Key.endsWith('.mp4') || i.Key.endsWith('.webm') || i.Key.endsWith('.mkv');
+      const isImage =/\.(JPG|PNG|png|jpeg|jpg)$/.test(i.Key);
+      const isVideo = /\.(mp4|webm|mkv|mov)$/.test(i.Key);
       const signedUrl = s3.getSignedUrl('getObject', params);
 // photos
       if(isImage){
@@ -195,10 +169,35 @@ const getData= async(pageNumber,continuationToken = undefined) =>{
           
    </div>
 
-        <Pagination totalCount={totalCount} onPageChange={handlePageChange} />
+        {/* <Pagination totalCount={totalCount} onPageChange={handlePageChange} currentPage={currentPage} /> */}
+        <div className='flex justify-center'>
+    <div className="fixed bottom-0 p-2 md:p-4 bg-black rounded-md bg-opacity-50 z-10 mb-2 md:mb-5 ">
+      <div className='flex justify-center space-x-3'>
+      <ReactPaginate
+        previousLabel={"<Previous"}
+        nextLabel={"Next>"}
+        breakLabel={"•••"}
+        pageCount={totalCount}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={3}
+        onPageChange={handlePageChange}
+        containerClassName={"flex flex-row justify-center space-x-3"}
+        pageClassName={"btn-grad"}
+        pageLinkClassName={""}
+        previousClassName={"font-bold text-lg text-white"}
+        previousLinkClassName={"font-bold text-lg"}
+        nextClassName={"font-bold text-lg text-white"}
+        nextLinkClassName={"font-bold text-lg"}
+        breakClassName={"space-x-2"}
+        breakLinkClassName={"text-white"}
+        activeClassName={"border border-2 border-white"}
+      />
+      </div>
+    </div>
+    </div>
     
   </>) : (
-      <div className='text-center mt-12 md:my-40 text-6xl font-bold text-white min-h-screen'>
+      <div className='text-center mt-12 md:my-40 text-6xl font-bold text-black min-h-screen'>
         Please Log In! </div>
     )
   )

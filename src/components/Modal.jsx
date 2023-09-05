@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import Loading from './Loading';
+import {AiOutlineDownload, AiFillCloseCircle} from 'react-icons/ai'
 
 
 const Modal = ({  onClose, targetPhoto, s3_sdk, bucket}) => {
@@ -44,28 +45,30 @@ const Modal = ({  onClose, targetPhoto, s3_sdk, bucket}) => {
               },[])
           
     return (
-      <div className="fixed inset-0 flex items-center justify-center z-40 bg-black bg-opacity-75 ">
+      <div className="fixed inset-0 flex justify-center items-center z-50 bg-black bg-opacity-80">
       {photo ? 
       (
-      <div className="inset-0">
-       <div className="bg-white p-2 md:p-6 rounded-lg  max-w-screen-md h-[60vh] md:h-[90vh] w-auto overflow-hidden">
-        <div className='h-full overflow-visible'>
-         <img src={photo} alt="Original" className='rounded-lg w-auto h-full' /> 
-        </div>
-        <div className='flex flex-row fixed bottom-10'>
-        <button
-          onClick={onClose}
-          className="mt-2 px-4 py-2 bg-gray-500 bg-opacity-80 text-white rounded hover:bg-gray-600"
-        >
-          Close
-        </button>
-        <button
+      <div className="inset-0 ">
+       <div className="rounded-lg  max-w-screen-md  w-full overflow-hidden border3-shadow">
+       <div className='flex flex-row fixed top-5 right-10 '>
+                <button
               onClick={handleDownload}
-              className="ml-5 px-4 py-1 mt-2 bg-blue-500  text-white rounded bg-opacity-80 hover:bg-blue-600"
+              className=" text-5xl/ text-[#FF512F] icons-size"
             >
-              Download
+              <AiOutlineDownload />
             </button>
-          </div>
+
+            <button
+          onClick={onClose}
+          className="ml-10 text-xl text-[#FF512F] icons-size"
+        >
+          <AiFillCloseCircle/>
+        </button>
+        </div>
+        <div className='h-full overflow-visible'>
+         <img src={photo} alt="Original" className='rounded-lg w-full h-full phhh' /> 
+        </div>
+
       </div>
       </div>
     ) : <div className='top-32'><Loading/></div>} 

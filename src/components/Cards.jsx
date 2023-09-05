@@ -5,8 +5,8 @@ export const Cards = () => {
   return (
     
     <div className='m-6 md:m-14 flex flex-col mt-5'>
-        <div className='text-2xl text-center text-white md:text-4xl font-extrabold font-mono'>
-            Why Us?
+        <div className='text-2xl text-center text-balck md:text-4xl font-extrabold font-mono'>
+        Can you imagine losing ALL of your precious photos and videos, forever?
         </div>
 
         {/* card */}
@@ -17,7 +17,7 @@ export const Cards = () => {
             card_data.map((item)=>{
                 return(
                     <div key={item.id} className={`col-span-full md:grid-start-${item.id} md:col-span-1`}>
-                        <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 border2-shadow">
                                     {/* Image */}
                                     <div className='max-h-sm'>
                                         <img class="rounded-t-lg" src={item.imageUrl} alt="" />

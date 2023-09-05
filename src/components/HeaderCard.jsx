@@ -32,11 +32,11 @@ export default function HeaderCard() {
   }
   return (
 
-        <div className='flex flex-row bg-white bg-opacity-80 h-[200px] md:h-[450px] w-auto mx-4 min-[800px]:mx-20 xl:mx-32 mt-4 mb-2 md:mt-8 lg:mb-8'>
+        <div className='flex flex-row md:flex-row bg-white bg-opacity-80 h-[200px] md:h-[450px] w-auto mx-4 min-[800px]:mx-20 xl:mx-32 mt-4 mb-2 md:mt-8 lg:mb-8 rounded-lg border2-shadow'>
 
         {/* card */}
         <div className='relative'>
-            <img src={Image} alt='header' className='inline-flex h-[200px] md:h-[450px] w-auto lg:w-[450px]'/>
+            <img src={Image} alt='header' className=' h-[200px] md:h-[450px] w-auto lg:w-[auto] -z-50 rounded-lg head-img'/>
 
             <div className="absolute top-14 md:top-48 left-0 p-1 md:p-2 text-white bg-black bg-opacity-25">
               <div className="text-[6px] md:text-lg font-semibold md:font-bold w-[120px] md:w-[250px]">
@@ -55,8 +55,8 @@ export default function HeaderCard() {
         {
           user ? (
              <div>
-              <p className='text-sm md:text-3xl font-bold text-center m-2 md:m-4'>Welcome to Our Website</p>
-              <p className='text-xs md:text-base text-center'>Enjoy Amazing Photos and Videos</p>
+              <p className='text-sm md:text-3xl font-bold text-center m-2 md:m-4'>Welcome to digiAlbum</p>
+              <p className='text-xs md:text-base text-center'>Enjoy Your Amazing Photos and Videos</p>
             {/* <button type="button" className="text-white m-2 md:mt-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-md md:rounded-lg text-xs md:text-sm  px-2 md:px-5 py-1.5 md:py-2.5 mb-2">Log Out</button> */}
             </div>
             ): (
@@ -65,20 +65,20 @@ export default function HeaderCard() {
               {/* Email */}
               <div className="mb-2 md:mb-6">
                   <label for="email" className="block mb-2 text-xs md:text-xl font-medium text-gray-900 dark:text-white">Your email</label>
-                  <input type="email" id="email" className="rounded-md md:round-lg h-[30px] md:h-auto w-[130px] min-[425px]:w-[190px] md:w-[350px] lg:w-[450px] border-none" placeholder="name@mail.com"   required 
+                  <input type="email" id="email" className="inbut-border rounded-md md:round-lg h-[30px] md:h-auto w-[130px] min-[425px]:w-[190px] md:w-[350px] lg:w-[450px]" placeholder="name@mail.com"   required 
                   onChange={(e)=>setEmail(e.target.value)}/>
               </div>
   
               {/* Password */}
               <div className="mb-1 md:mb-6">
                   <label for="password" className="block mb-2 text-xs md:text-xl  font-medium text-gray-900 dark:text-white">Your Password</label>
-                  <input type="password" id="password" className="rounded-md md:round-lg  h-[30px] md:h-auto  w-[130px] min-[425px]:w-[190px] md:w-[350px] lg:w-[450px] border-none"  required
+                  <input type="password" id="password" className="inbut-border rounded-md md:round-lg  h-[30px] md:h-auto  w-[130px] min-[425px]:w-[190px] md:w-[350px] lg:w-[450px] "  required
                   onChange={(e)=>setPassword(e.target.value)}/>
               </div>
             
             {/* Submit button */}
           
-              <button type="submit" className="text-white m-2 md:mt-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-md md:rounded-lg text-xs md:text-sm  px-2 md:px-5 py-1.5 md:py-2.5 text-center  mb-2">Submit</button>
+              <button type="submit" className="btn-grad">Submit</button>
               <ToastContainer />
               </form>
 

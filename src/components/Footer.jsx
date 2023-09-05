@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 export default function FooterWeb() {
   return (
-    <Footer container className='rounded-none mb-0 bg-opacity-80'>
+    <Footer container className='bg-opacity-90 bg-gray-200 rounded-none mb-0 bg-opacity-80'>
       <div className="w-full">
         <div className="hidden w-full justify-evenly md:justify-between sm:flex  md:flex md:grid-cols-1">
           <div className='text-4xl'>
@@ -54,7 +54,7 @@ export default function FooterWeb() {
         <div className="w-full sm:flex sm:items-center md:justify-between">
           <Footer.Copyright
             by="digiAlbum"
-            href="#"
+            href="/"
             year={2023}
           />
           <div className="mt-4 md:mt-7 flex space-x-6 sm:mt-0 sm:justify-center">

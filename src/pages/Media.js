@@ -18,6 +18,10 @@ if(folders)
             if (index !== -1) {
             folders = folders.slice(0, index).concat(folders.slice(index + 1));
             }
+    let index2 = folders.indexOf('userType');
+            if (index2 !== -1) {
+            folders = folders.slice(0, index2).concat(folders.slice(index2 + 1));
+            }
 }
 
 const handleClick=(e, targetFolder)=>{
@@ -30,7 +34,7 @@ const handleClick=(e, targetFolder)=>{
 }
 
   return (
-    <div className='min-h-screen flex flex-col md:flex-row md:justify-center mt-5 md:mt-0 is-center md:space-x-32'>
+    <div className='min-h-screen flex flex-col flex-wrap md:flex-row md:justify-center mt-5 md:mt-0 is-center gap-5 mb-10'>
         {
           user ? ( folders ? folders.map((i,index)=>{
                 return(
@@ -43,7 +47,7 @@ const handleClick=(e, targetFolder)=>{
                         
                     // </div>
                     <div key={index} className={`col-span-full md:grid-start-${index} md:col-span-1 mt-5`}>
-                    <div class="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <div class="max-w-xs bg-gray-200 bg-opacity-90 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                                 {/* Image */}
                                 <div className='max-h-xs'>
                                     <img class="rounded-t-lg" src={Img} alt="" />

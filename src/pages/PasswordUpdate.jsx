@@ -38,14 +38,14 @@ export const PasswordUpdate = () => {
 
         {/* Password */}
         <div className="mb-1 md:mb-6">
-            <label for="password" className="block mb-2 text-xs md:text-xl  font-medium text-white">New Password</label>
-            <input type="password" id="password" className="rounded-md md:round-lg  h-[30px] md:h-auto  w-[130px] min-[425px]:w-[190px] md:w-[350px] lg:w-[450px] border-none"  required
+            <label for="password" className="block mb-2 text-xs md:text-xl  font-medium text-black">New Password</label>
+            <input type="password" id="password" className="rounded-md md:round-lg  h-[30px] md:h-auto  w-[130px] min-[425px]:w-[190px] md:w-[350px] lg:w-[450px] inbut-border"  required
             onChange={(e)=>setNewPassword(e.target.value)}/>
         </div>
 
 {/* Submit button */}
 
-<button type="submit" className="text-white m-2 md:mt-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-md md:rounded-lg text-xs md:text-sm  px-2 md:px-5 py-1.5 md:py-2.5 text-center  mb-2">Submit</button>
+<button type="submit" className="btn-grad">Submit</button>
 <ToastContainer />
 </form>
     </div>

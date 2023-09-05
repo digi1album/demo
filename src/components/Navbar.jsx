@@ -23,32 +23,32 @@ import LogoImage from "../Assets/images/logo.png"
 
 
   return (
-<Navbar fluid className='bg-opacity-60 sticky top-0 h-10 md:h-16'>
+<Navbar fluid className='bg-opacity-90 bg-gray-200 sticky top-0 h-10 md:h-16 z-50'>
       <Navbar.Brand>
         <span className="self-center whitespace-nowrap flex flex-row">
           <img src={LogoImage} alt="logo" className='h-4 md:h-9 w-auto'/> <p className='text-sm mb-4 ml-2 md:text-xl font-semibold'>digiAlbum</p>
         </span>
       </Navbar.Brand>
 
-      <Navbar.Toggle />
+      <Navbar.Toggle  />
 
-      <Navbar.Collapse>
+      <Navbar.Collapse className='bg-gray-200 bg-opacity-90 md:bg-transparent'>
       
         <Navbar.Link
           
         >
-          <p className=''>
+          <p className='text-black md:text-gray-700'>
             <Link to='/'> Home</Link>
           </p>
         </Navbar.Link>
 
-        <Navbar.Link className=''>
+        <Navbar.Link className=' text-black md:text-gray-700'>
           <Link to='/media'>Media</Link>
         </Navbar.Link>
 
         
 
-        <Navbar.Link  className=''>
+        <Navbar.Link  className='text-black md:text-gray-700'>
           <Link to='/contact'>Contact Us</Link>
         </Navbar.Link>
         {
@@ -56,10 +56,10 @@ import LogoImage from "../Assets/images/logo.png"
             <div className='flex flex-row space-x-3'>
                 <Navbar.Link  className=''>
               
-                  <button type="button" className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-sm md:rounded-md text-[10px]  px-1 md:px-2 py-0.5 md:py-1.0" onClick={handleClick}>Log Out</button>
+                  <button type="button" className="btn-grad" onClick={handleClick}>Log Out</button>
                 </Navbar.Link>
                 <Navbar.Link  className=''>
-                <button type="button" className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-sm md:rounded-md text-[10px]  px-1 md:px-2 py-0.5 md:py-1.0" onClick={()=>navigate('/password_update')}>Update Password</button>
+                <button type="button" className="btn-grad" onClick={()=>navigate('/password_update')}>Update Password</button>
               </Navbar.Link>
           </div>
           )

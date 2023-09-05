@@ -14,7 +14,7 @@ export const card_data= [
     {
         id: 3,
         title: 'digiAlbum',
-        description: "Data is stored on cloud. Has backup on more than 6 servers, so dataloss is next to impossible. Its available for very cheap compared to other service providers. Unique and designed for Special events like Wedding, Engagement, birthdays, etc. ",
+        description: "Data is stored on cloud. Has backup on more that 6 servers, so dataloss is next to impossible. Its available for very cheap compared to other service providers. Unique and designed for Special events like Wedding, Engagement, birthdays, etc. ",
         imageUrl: 'https://demo-tawny-two.vercel.app/static/media/logo.2b4059680e0bb35264d8.png'
     },
     
