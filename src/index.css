@@ -95,9 +95,7 @@ max-height: 90vh;
     /* background-size: 50% auto; */
   }
   .my-masonry-grid{
-    display: block;
-    width: 745px;
-    height: 150px;
+    
   }
 }
 
