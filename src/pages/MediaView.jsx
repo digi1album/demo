@@ -114,6 +114,7 @@ const getData= async(pageNumber,continuationToken = undefined) =>{
   console.log("page: ", currentPage, "data: ", data)
 
   const handlePageChange = (e) => { 
+    window.scrollTo(0, 0);
     console.log("selected page: ", e.selected+1)
     setCurrentPage(e.selected+1);
   };
@@ -121,11 +122,11 @@ const getData= async(pageNumber,continuationToken = undefined) =>{
   const breakpointColumnsObj = {
     default: 4, // Number of columns by default
     1100: 4,    // Number of columns for screens 1100px and above
-    700: 2      // Number of columns for screens 700px and above
+    700: 2      // Number of columns for screens 700px and below
   };
   return (
     user ? 
-   (<> <div className='mx-2 md:mx-5  mt-5 min-h-screen'>
+   (<> <div className='mx-2 md:mx-5  mt-5 min-h-screen scroll-top'>
     {data ? 
     (<Masonry
       breakpointCols={breakpointColumnsObj}
@@ -156,10 +157,23 @@ const getData= async(pageNumber,continuationToken = undefined) =>{
       // videos
       if(isVideo)
       {
+        const parts = i.Key.split('/')
+        
+        // Find the last dot (.) in the string
+          const lastDotIndex = parts[parts.length-1].lastIndexOf('.');
+          let resultString
+          if (lastDotIndex !== -1) {
+            // Extract the part of the string before the last dot
+            resultString = parts[parts.length-1].substring(0, lastDotIndex);
+          } else {
+            // If there is no dot in the string, keep the original string
+            resultString = parts[parts.length-1];
+          }
         return(
-            <div key={i.Key} className={`rounded-md`}>
+            <div key={i.Key} className={`flex flex-col md:flex-row flex-wrap rounded-md mb-5 mx-5 md:mx-2 `}>
               
-                <video src={signedUrl} className='w-full h-auto' controls/>  
+                <video src={signedUrl} className='w-full h-auto' controls/>
+                <h1 className='text-black text-sm font-medium '>{resultString}</h1>  
             </div>
           )
       }

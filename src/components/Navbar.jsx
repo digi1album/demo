@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Navbar } from 'flowbite-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
 import LogoImage from "../Assets/images/logo.png"
 
  const NavbarDefault = ()=> {
+
+  const [mobileOpen, setMobileOpen]= useState(true)
 
   const {user, logout} = UserAuth()
 
@@ -21,6 +23,13 @@ import LogoImage from "../Assets/images/logo.png"
     }
   }
 
+  const handleMobileMenu =()=>{
+    setMobileOpen(!mobileOpen);  //toggle the state of mobile menu
+  }
+  
+  const closeMobileMenu= ()=>{
+    setMobileOpen(false)
+  }
 
   return (
 <Navbar fluid className='bg-opacity-90 bg-gray-200 sticky top-0 h-10 md:h-16 z-50'>
@@ -30,35 +39,35 @@ import LogoImage from "../Assets/images/logo.png"
         </span>
       </Navbar.Brand>
 
-      <Navbar.Toggle  />
+      <Navbar.Toggle onClick={handleMobileMenu} />
 
-      <Navbar.Collapse className='bg-gray-200 bg-opacity-90 md:bg-transparent'>
+      <Navbar.Collapse className={`bg-white bg-opacity-90 text-black md:bg-transparent ${mobileOpen ? 'block': 'hidden'}`}>
       
         <Navbar.Link
-          
+          onClick={closeMobileMenu}
         >
           <p className='text-black md:text-gray-700'>
             <Link to='/'> Home</Link>
           </p>
-        </Navbar.Link>
+        </Navbar.Link >
 
-        <Navbar.Link className=' text-black md:text-gray-700'>
+        <Navbar.Link onClick={closeMobileMenu} className=' text-black md:text-gray-700'>
           <Link to='/media'>Media</Link>
         </Navbar.Link>
 
         
 
-        <Navbar.Link  className='text-black md:text-gray-700'>
+        <Navbar.Link onClick={closeMobileMenu} className='text-black md:text-gray-700'>
           <Link to='/contact'>Contact Us</Link>
-        </Navbar.Link>
+        </Navbar.Link >
         {
           user && (
             <div className='flex flex-row space-x-3'>
-                <Navbar.Link  className=''>
+                <Navbar.Link onClick={closeMobileMenu} className=''>
               
                   <button type="button" className="btn-grad" onClick={handleClick}>Log Out</button>
                 </Navbar.Link>
-                <Navbar.Link  className=''>
+                <Navbar.Link onClick={closeMobileMenu} className=''>
                 <button type="button" className="btn-grad" onClick={()=>navigate('/password_update')}>Update Password</button>
               </Navbar.Link>
           </div>

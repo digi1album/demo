@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { UserAuth } from '../context/AuthContext'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import DownloadButton from '../components/media-download'
 export default function HeaderCard() {
 
   const [email, setEmail] = useState('')
@@ -32,13 +32,13 @@ export default function HeaderCard() {
   }
   return (
 
-        <div className='flex flex-row md:flex-row bg-white bg-opacity-80 h-[200px] md:h-[450px] w-auto mx-4 min-[800px]:mx-20 xl:mx-32 mt-4 mb-2 md:mt-8 lg:mb-8 rounded-lg border2-shadow'>
+        <div className='flex flex-row md:flex-row bg-white bg-opacity-80 h-[200px] md:h-[450px] w-auto mx-4 min-[800px]:mx-20 xl:mx-32 mt-4 mb-2 md:mt-8 lg:mb-8 rounded-lg border2-shadow res-display'>
 
         {/* card */}
         <div className='relative'>
             <img src={Image} alt='header' className=' h-[200px] md:h-[450px] w-auto lg:w-[auto] -z-50 rounded-lg head-img'/>
-
-            <div className="absolute top-14 md:top-48 left-0 p-1 md:p-2 text-white bg-black bg-opacity-25">
+                {/* <DownloadButton /> */}
+            <div className="absolute top-14 md:top-48 left-0 p-1 md:p-2 text-white bg-black bg-opacity-25 head-txt">
               <div className="text-[6px] md:text-lg font-semibold md:font-bold w-[120px] md:w-[250px]">
                 <span className='typing-animation animate-typing animate-reacting line-clamp-1'>Your Love Story, Always</span>
                 <span className='typing-animation animate-typing animate-reacting line-clamp-1'> Accessible, Forever Unforgettable!</span>
@@ -51,7 +51,7 @@ export default function HeaderCard() {
         {/* right log-in section */}
        
 
-        <div className='p-2 min-[425px]:p-5 md:p-10 md:ml-8 md:mt-9'>
+        <div className='p-2 min-[425px]:p-5 md:p-10 md:ml-8 md:mt-9 tempp'>
         {
           user ? (
              <div>
@@ -65,14 +65,14 @@ export default function HeaderCard() {
               {/* Email */}
               <div className="mb-2 md:mb-6">
                   <label for="email" className="block mb-2 text-xs md:text-xl font-medium text-gray-900 dark:text-white">Your email</label>
-                  <input type="email" id="email" className="inbut-border rounded-md md:round-lg h-[30px] md:h-auto w-[130px] min-[425px]:w-[190px] md:w-[350px] lg:w-[450px]" placeholder="name@mail.com"   required 
+                  <input type="email" id="email" className="inbut-border rounded-md md:round-lg h-[30px] md:h-auto w-[230px] min-[425px]:w-[190px] md:w-[350px] lg:w-[450px]" placeholder="name@mail.com"   required 
                   onChange={(e)=>setEmail(e.target.value)}/>
               </div>
   
               {/* Password */}
               <div className="mb-1 md:mb-6">
                   <label for="password" className="block mb-2 text-xs md:text-xl  font-medium text-gray-900 dark:text-white">Your Password</label>
-                  <input type="password" id="password" className="inbut-border rounded-md md:round-lg  h-[30px] md:h-auto  w-[130px] min-[425px]:w-[190px] md:w-[350px] lg:w-[450px] "  required
+                  <input type="password" id="password" className="inbut-border rounded-md md:round-lg  h-[30px] md:h-auto  w-[230px] min-[425px]:w-[190px] md:w-[350px] lg:w-[450px] "  required
                   onChange={(e)=>setPassword(e.target.value)}/>
               </div>
             

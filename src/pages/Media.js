@@ -26,7 +26,7 @@ if(folders)
 
 const handleClick=(e, targetFolder)=>{
     e.preventDefault()
-    
+    window.scrollTo(0, 0);
     const propsToPass = {
         target: targetFolder,
       };
@@ -34,7 +34,7 @@ const handleClick=(e, targetFolder)=>{
 }
 
   return (
-    <div className='min-h-screen flex flex-col flex-wrap md:flex-row md:justify-center mt-5 md:mt-0 is-center gap-5 mb-10'>
+    <div className='min-h-screen flex flex-col flex-wrap md:flex-row md:justify-center mt-5 md:mt-0 is-center gap-5 mb-10 folder-grid'>
         {
           user ? ( folders ? folders.map((i,index)=>{
                 return(

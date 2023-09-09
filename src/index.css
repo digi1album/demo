@@ -31,7 +31,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   transition: 0.5s;
   background-size: 200% auto;
   color: white;            
-  box-shadow: 0 0 20px #eee;
+  box-shadow: 0 0 10px #eee;
   border-radius: 10px;
   display: block;
 }
@@ -67,6 +67,7 @@ max-height: 90vh;
 .head-img {
   opacity: 90%;
 }
+
 .videos-card {
   min-height:250px !important;
   min-width: 400px !important;
@@ -74,11 +75,49 @@ max-height: 90vh;
  .icons-size{
    font-size: 30px;
  }
-/* @media only screen and (max-width: 600px) {
-  .head-img {
-    display:none ;
+@media only screen and (max-width: 600px) {
+  .res-display{
+    display: inline-table;
   }
-} */
+  .head-txt{
+    display: none;
+  }
+  .tempp{
+    display: flex;
+  justify-content: center;
+  }
+  .folder-grid{
+    margin-left: 15px;
+  }
+  .btn-grad{
+    padding: 1px 5px;
+    box-shadow: 0 0 5px #eee;
+    /* background-size: 50% auto; */
+  }
+  .my-masonry-grid{
+    display: block;
+    width: 745px;
+    height: 150px;
+  }
+}
+
+
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+.bounce {
+  animation: bounce 1.0s;
+}
+
   /* Image galary page css*/
 
   .photo-gallery{
