@@ -6,7 +6,7 @@ import LogoImage from "../Assets/images/logo.png"
 
  const NavbarDefault = ()=> {
 
-  const [mobileOpen, setMobileOpen]= useState(true)
+  const [mobileOpen, setMobileOpen]= useState(false)
 
   const {user, logout} = UserAuth()
 
