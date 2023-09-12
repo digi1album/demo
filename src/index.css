@@ -87,15 +87,12 @@ max-height: 90vh;
   justify-content: center;
   }
   .folder-grid{
-    margin-left: 15px;
+    margin-left: 10%;
   }
   .btn-grad{
     padding: 1px 5px;
     box-shadow: 0 0 5px #eee;
     /* background-size: 50% auto; */
-  }
-  .my-masonry-grid{
-    
   }
 }
 
