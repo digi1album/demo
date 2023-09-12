@@ -4,12 +4,12 @@ import { UserAuth } from '../context/AuthContext';
 import AWS from 'aws-sdk';
 import Modal from '../components/Modal';
 import Loading from '../components/Loading';
-import Masonry from 'react-masonry-css';
+import Masonry from "react-masonry-css"
 import ReactPaginate from 'react-paginate';
 
 
 
-const pageSize = 50;
+const pageSize = 100;
 
 
 export const MediaView = () => {
@@ -79,7 +79,6 @@ const getData= async(pageNumber,continuationToken = undefined) =>{
               }).promise();
               const totalPages = Math.ceil(data_total.KeyCount/ pageSize);
               setTotalCount(totalPages);
-              console.log(data_total.KeyCount, "count")
             }
 
       if (pageNumber > 1) {
@@ -93,7 +92,6 @@ const getData= async(pageNumber,continuationToken = undefined) =>{
         }
       }
 
-      console.log("final token: ", params.ContinuationToken)
   
       try {
         const response = await s3.listObjectsV2(params).promise();
@@ -111,54 +109,89 @@ const getData= async(pageNumber,continuationToken = undefined) =>{
   },[targetLink, currentPage])
 
 
-  console.log("page: ", currentPage, "data: ", data)
 
   const handlePageChange = (e) => { 
-    window.scrollTo(0, 0);
-    console.log("selected page: ", e.selected+1)
     setCurrentPage(e.selected+1);
+    window.scrollTo(0,0)
   };
+  
 
-  const breakpointColumnsObj = {
-    default: 4, // Number of columns by default
-    1100: 4,    // Number of columns for screens 1100px and above
-    700: 2      // Number of columns for screens 700px and below
-  };
+
+
+
+var photos=[]
+var videos=[]
+
+ data && data.slice(1).map((i,index)=>{
+  const params = { Bucket: bucketName, Key: i.Key };
+  const isImage =/\.(JPG|PNG|png|jpeg|jpg)$/.test(i.Key);
+  const isVideo = /\.(mp4|webm|mkv|mov)$/.test(i.Key);
+  const signedUrl = s3.getSignedUrl('getObject', params);
+  let obj= {
+    url: signedUrl,
+    Key: i.Key
+  }
+  if(isImage) {photos.push(obj)}
+  if(isVideo) {videos.push(obj)}
+})
+
+
   return (
     user ? 
-   (<> <div className='mx-2 md:mx-5  mt-5 min-h-screen scroll-top'>
-    {data ? 
-    (<Masonry
-      breakpointCols={breakpointColumnsObj}
-      className="my-masonry-grid"
-      columnClassName="my-masonry-grid_column"
-    >
-      { data.slice(1).map((i,index)=>{
-      const params = { Bucket: bucketName, Key: i.Key };
-      const isImage =/\.(JPG|PNG|png|jpeg|jpg)$/.test(i.Key);
-      const isVideo = /\.(mp4|webm|mkv|mov)$/.test(i.Key);
-      const signedUrl = s3.getSignedUrl('getObject', params);
-// photos
-      if(isImage){
-        return(
-          <>
-            <div key={i.Key} className={``}>
-              <button  onClick={()=>openModal(i.Key)}>
-                <img src={signedUrl} alt={`${i.Key}`} className='object-cover w-full h-full rounded-md' />
-                </button>
-            </div>
-            
-            {isModalOpen && (imgKey === i.Key && <Modal onClose={closeModal}  targetPhoto={i.Key} s3_sdk={s3} bucket={bucketName}/>)}
-            </>
-          )
-      }
+   (<> <div className='mx-2 md:mx-5  mt-5 min-h-screen scroll-auto'>
+    { data ? (
 
+ photos.length > 0 ? (
+  <Masonry
+  breakpointCols={
+                    {
+                    // Number of columns by default
+                default:  4 ,
+                // Number of columns for screens 1100px and above
+                1100:  3,
+                // Number of columns for screens 700px and above
+                700:  2
+                }}
+  className="my-masonry-grid gap-1 md:gap-3"
+  columnClassName="my-masonry-grid_column"
+>
 
-      // videos
-      if(isVideo)
-      {
+   { photos.map((items, index)=>{
+      return(
+        <>
+          <div key={items.Key} className={``}>
+            <button  onClick={()=>openModal(items.Key)}>
+              <img src={items.url} alt={`${items.Key}`} className='object-cover w-full h-full rounded-md' />
+              </button>
+          </div>
+          
+          {isModalOpen && (imgKey === items.Key && <Modal onClose={closeModal}  targetPhoto={items.Key} s3_sdk={s3} bucket={bucketName}/>)}
+          </>
+        )
+
+    })}
+    </Masonry>
+): 
+
+  videos.length>0 && (
+    <Masonry
+    breakpointCols={
+                      {
+                      // Number of columns by default
+                  default:  3 ,
+                  // Number of columns for screens 1100px and above
+                  1100:  2,
+                  // Number of columns for screens 700px and above
+                  700:  1
+                  }}
+    className="my-masonry-grid gap-1"
+    columnClassName="my-masonry-grid_column"
+  >
+    {
+      videos.map((i,index)=>{
+
         const parts = i.Key.split('/')
-        
+    
         // Find the last dot (.) in the string
           const lastDotIndex = parts[parts.length-1].lastIndexOf('.');
           let resultString
@@ -169,22 +202,32 @@ const getData= async(pageNumber,continuationToken = undefined) =>{
             // If there is no dot in the string, keep the original string
             resultString = parts[parts.length-1];
           }
+          
         return(
-            <div key={i.Key} className={`flex flex-col md:flex-row flex-wrap rounded-md mb-5 mx-5 md:mx-2 `}>
+            <div key={i.Key} className={`flex flex-wrap rounded-md mb-2 md:mb-5 mx-1 md:mx-2`}>
               
-                <video src={signedUrl} className='w-full h-auto' controls/>
+                <video src={i.url} className='w-full h-auto' controls/>
                 <h1 className='text-black text-sm font-medium '>{resultString}</h1>  
             </div>
           )
-      }
 
-      
-    })}</Masonry>)   : <Loading /> }
+
+      })
+    }
+    </Masonry>
+  )
+
+
+
+    ): <Loading />
+    
+    }
+
           
    </div>
 
-        {/* <Pagination totalCount={totalCount} onPageChange={handlePageChange} currentPage={currentPage} /> */}
-        <div className='flex justify-center'>
+         {/* <Pagination totalCount={totalCount} onPageChange={handlePageChange} currentPage={currentPage} /> */}
+         <div className='flex justify-center'>
     <div className="fixed bottom-0 p-2 md:p-4 bg-black rounded-md bg-opacity-50 z-10 mb-2 md:mb-5 ">
       <div className='flex justify-center space-x-3'>
       <ReactPaginate
